@@ -171,7 +171,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                                     opcion = "El Señor del Huerto";
                                     //recargar fragment
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    spinner.setSelectedIndex(3);
                                     reloadFragments();
+
 
                                     break;
                                 case "10903":
@@ -179,18 +181,21 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                                     //card_desc.setDesc("Esta es la descripcion del paso El Crucifijo");
                                     opcion = "El Crucifijo";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    spinner.setSelectedIndex(1);
                                     reloadFragments();
                                     break;
                                 case "51626":
                                     // San Juan Evangelista
                                     opcion = "San Juan Evangelista";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    spinner.setSelectedIndex(0);
                                     reloadFragments();
                                     break;
                                 case "43984":
                                     // Virgen de los Dolores
                                     opcion = "Virgen de los Dolores";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    spinner.setSelectedIndex(2);
                                     reloadFragments();
                                     break;
                             }
