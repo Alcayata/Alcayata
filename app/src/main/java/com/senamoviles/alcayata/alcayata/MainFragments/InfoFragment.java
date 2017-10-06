@@ -22,7 +22,6 @@ import butterknife.Unbinder;
  */
 public class InfoFragment extends Fragment {
 
-    String op = "juan";
     @BindView(R.id.img_paso)
     ImageView imgPaso;
     @BindView(R.id.txt_desc)
@@ -49,26 +48,22 @@ public class InfoFragment extends Fragment {
 
         switch (MainActivity.opcion){
             case "San Juan Evangelista":
-                op = "juan";
                 txtDesc.setText(getResources().getText(R.string.descripcionJuan));
                 cardSabias.setText(getResources().getText(R.string.sabiasJuan));
                 imgPaso.setImageResource(R.drawable.juan);
 
                 break;
             case "El Crucifijo":
-                op = "crucifijo";
                 txtDesc.setText(getResources().getString(R.string.descripcionCrucifijo));
                 cardSabias.setText(getResources().getString(R.string.sabiasCrucifijo));
                 imgPaso.setImageResource(R.drawable.crucifijo);
                 break;
             case "Virgen de los Dolores":
-                op = "virgen";
                 txtDesc.setText(getResources().getString(R.string.descripcionVirgen));
                 cardSabias.setText(getResources().getString(R.string.sabiasVirgen));
                 imgPaso.setImageResource(R.drawable.virgen);
                 break;
             case "El Señor del Huerto":
-                op = "huerto";
                 txtDesc.setText(getResources().getString(R.string.descripcionhuerto));
                 cardSabias.setText(getResources().getString(R.string.sabiasHuerto));
                 imgPaso.setImageResource(R.drawable.huerto);
@@ -76,10 +71,6 @@ public class InfoFragment extends Fragment {
         }
         return view;
     }
-
-
-
-
 
     @Override
     public void onDestroyView() {
