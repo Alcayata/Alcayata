@@ -36,6 +36,7 @@ dependencies {
     compile 'com.ss.bottomnavigation:bottomnavigation:1.5.2'
     compile 'com.jaredrummler:material-spinner:1.2.1'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'org.altbeacon:android-beacon-library:2.+'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

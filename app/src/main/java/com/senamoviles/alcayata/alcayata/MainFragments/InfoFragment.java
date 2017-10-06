@@ -46,6 +46,7 @@ public class InfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         unbinder = ButterKnife.bind(this, view);
+
         switch (MainActivity.opcion){
             case "San Juan Evangelista":
                 op = "juan";
