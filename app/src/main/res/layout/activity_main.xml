@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.senamoviles.alcayata.alcayata.MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ms_background_color="@color/colorPrimary"
+        app:ms_text_color="@color/colorWhite"/>
+
+    <FrameLayout
+        android:id="@+id/frame_fragment_containers"
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+ />
+
+    <com.ss.bottomnavigation.BottomNavigation
+        android:id="@+id/botton_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:mode="phone">
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_flower"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_local_florist_white_24dp"
+            app:tab_text="Flores" />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_volume_up_white_24dp"
+            app:tab_text="Audio"/>
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_paso"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_info_outline_white_24dp"
+            app:tab_text="Paso" />
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_3d"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_3d_rotation_white_24dp"
+            app:tab_text="Modelo"/>
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_citial"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_event_seat_white_24dp"
+            app:tab_text="Citial" />
+
+    </com.ss.bottomnavigation.BottomNavigation>
+
+
+</LinearLayout>
