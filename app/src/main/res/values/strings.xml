@@ -3,4 +3,29 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="descripcionJuan">Juan fue conocido como el apóstol amado, estuvo en todos
+        los momentos importantes al lado de Jesús, por eso vemos su imagen en cada una de
+        las procesiones de Popayán</string>
+    <string name="descripcionhuerto">Este paso representa el momento en que Jesús realiza una oración
+        antes de ser capturado por los soldados romanos</string>
+    <string name="descripcionVirgen">María, la madre de Jesús, sufre un dolor tan grande por la
+        muerte de su hijo, que es representado con una espada atravesándole el corazón</string>
+    <string name="descripcionCrucifijo">Jesús agoniza, sufre y finalmente muere en la Cruz</string>
+
+    <string name="sabiasJuan">¿Sabías que los cargueros de Popayán pueden terminar
+        con el hombro reventado y prefieren morir antes que retirarse del paso durante el
+        recorrido procesional?</string>
+    <string name="sabiasHuerto">¿Sabías que en la Cruz de un paso de la Semana Santa de Popayán
+        está incrustado un trozo de la verdadera Cruz de Cristo?</string>
+    <string name="sabiasVirgen">¿Sabías que La Virgen de los Dolores lleva en el pecho
+        uno de los mayores secretos religiosos de Popayán?</string>
+    <string name="sabiasCrucifijo">¿Sabías que ni los terremotos ni las guerras han causado
+        la suspensión de las procesiones de Popayán?</string>
+
+    <string name="sabiasMasJuan"></string>
+    <string name="sabiasMasHuerto"></string>
+    <string name="sabiasMasVirgen"></string>
+    <string name="sabiasMasCrucifijo"></string>
+
 </resources>

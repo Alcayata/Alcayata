@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment Modelo Paso" />
+    <Button
+        android:id="@+id/btn_modelo"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modelo 3D"/>
 
 </FrameLayout>

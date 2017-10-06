@@ -14,10 +14,17 @@
         app:ms_background_color="@color/colorPrimary"
         app:ms_text_color="@color/colorWhite"/>
 
-    <FrameLayout
-        android:id="@+id/frame_fragment_containers"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="460dp">
+
+        <FrameLayout
+            android:id="@+id/frame_fragment_containers"
+            android:layout_width="match_parent"
+            android:layout_height="460dp"/>
+    </ScrollView>
+
  />
 
     <com.ss.bottomnavigation.BottomNavigation
