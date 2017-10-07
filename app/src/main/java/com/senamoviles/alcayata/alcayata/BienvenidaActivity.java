@@ -19,11 +19,11 @@ public class BienvenidaActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance("Bienvenido!","Disfruta una increible experiencia  durante el recorrido procesional",
                 R.drawable.logo, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
         addSlide(AppIntroFragment.newInstance("Audifonos","Para disfrutar el audio de la aplicacion utiliza los audifonos",
-                R.drawable.logo, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+                R.drawable.audifonos, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         askForPermissions(new String[]{Manifest.permission.BLUETOOTH_ADMIN}, 2);
         addSlide(AppIntroFragment.newInstance("Bluetooth","Necesitas activar el bluetooth para una asistencia automatizada durante el recorrido",
-                R.drawable.logo, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+                R.drawable.bluetooth, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         showSkipButton(true);
 
