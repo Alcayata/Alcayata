@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "953005817426",
+    "firebase_url": "https://alcayata-2017.firebaseio.com",
+    "project_id": "alcayata-2017",
+    "storage_bucket": "alcayata-2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953005817426:android:0677ca1aa2fc8f93",
+        "android_client_info": {
+          "package_name": "com.senamoviles.alcayata.pdfdownload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953005817426-ia9p2vplpgpmsfgqk0e8584hjomt3spp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.senamoviles.alcayata.pdfdownload",
+            "certificate_hash": "d911071bd106fe73889811ea175e63e0540845cc"
+          }
+        },
+        {
+          "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL07hsV_Om62wlfm7KpuEund796Fsi0-Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953005817426:android:466ac08d3490c5e8",
+        "android_client_info": {
+          "package_name": "com.danielardila.bottonnavigationbar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953005817426-f2udfgc1dqig7vpkikmkir25h1ognu7s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danielardila.bottonnavigationbar",
+            "certificate_hash": "0980ca8c5c67acccfc8df8798a3e5ba1fd86cc9d"
+          }
+        },
+        {
+          "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL07hsV_Om62wlfm7KpuEund796Fsi0-Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953005817426:android:9d923dea9f055e04",
+        "android_client_info": {
+          "package_name": "com.senamoviles.alcayata.alcayata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953005817426-3470f6ikt3oqjf1n9h3ctt641tknmvnj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.senamoviles.alcayata.alcayata",
+            "certificate_hash": "0980ca8c5c67acccfc8df8798a3e5ba1fd86cc9d"
+          }
+        },
+        {
+          "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL07hsV_Om62wlfm7KpuEund796Fsi0-Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953005817426-hv0djd4dophujss2uriq0prj9k6atcbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,6 @@
 package com.senamoviles.alcayata.alcayata;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
@@ -13,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.senamoviles.alcayata.alcayata.MainFragments.AudioFragment;
+import com.senamoviles.alcayata.alcayata.MainFragments.DescargaFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.FloresFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.InfoFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment;
@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 Toast.makeText(MainActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
                 opcion = item.toString();
                 //recargar fragment Info
-                reloadFragments();
+                reloadInfoFragment();
+                //reloadModeloFragment();
             }
         });
 
@@ -98,30 +99,33 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                         transaction.replace(R.id.frame_fragment_containers,new FloresFragment());
                         fragment = new FloresFragment();
                         break;
-                    case R.id.item_volume:
-                        // TODO 1: decidir que agregar
+                    case R.id.item_audio:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
-                        fragment = new ModeloFragment();
+                        transaction.replace(R.id.frame_fragment_containers,new AudioFragment());
+                        fragment = new AudioFragment();
                         break;
-                    case R.id.item_citial:
-                        // TODO 2: decidir que agregar
+                    case R.id.item_download:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
-                        fragment = new InfoFragment();
+                        transaction.replace(R.id.frame_fragment_containers,new DescargaFragment());
+                        fragment = new DescargaFragment();
                         break;
                 }
                 transaction.commit();
             }
         });
-
-
     }
 
-    public void reloadFragments(){
+    public void reloadInfoFragment(){
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
         fragment = new InfoFragment();
+        transaction.commit();
+    }
+
+    public void reloadModeloFragment(){
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
+        fragment = new ModeloFragment();
         transaction.commit();
     }
 
@@ -139,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void didExitRegion(Region region) {
                 try {
@@ -153,10 +156,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
 
             @Override
             public void didDetermineStateForRegion(int i, Region region) {
-
             }
         });
-
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
@@ -172,8 +173,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                                     //recargar fragment
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(3);
-                                    reloadFragments();
-
+                                    reloadInfoFragment();
+                                    //reloadModeloFragment();
 
                                     break;
                                 case "10903":
@@ -182,28 +183,30 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                                     opcion = "El Crucifijo";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(1);
-                                    reloadFragments();
+                                    reloadInfoFragment();
+                                    //reloadModeloFragment();
                                     break;
                                 case "51626":
                                     // San Juan Evangelista
                                     opcion = "San Juan Evangelista";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(0);
-                                    reloadFragments();
+                                    reloadInfoFragment();
+                                    //reloadModeloFragment();
                                     break;
                                 case "43984":
                                     // Virgen de los Dolores
                                     opcion = "Virgen de los Dolores";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(2);
-                                    reloadFragments();
+                                    reloadInfoFragment();
+                                    //reloadModeloFragment();
                                     break;
                             }
                         }
                     });
 
                 }
-
             }
 
         });

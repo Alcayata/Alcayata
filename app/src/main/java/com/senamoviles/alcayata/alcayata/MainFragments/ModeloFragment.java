@@ -9,14 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.senamoviles.alcayata.alcayata.MainActivity;
 import com.senamoviles.alcayata.alcayata.ModeloActivity;
 import com.senamoviles.alcayata.alcayata.R;
-import com.senamoviles.modelo3d.UnityPlayerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -25,6 +25,9 @@ import butterknife.Unbinder;
 public class ModeloFragment extends Fragment {
 
 
+    @BindView(R.id.info_modelo)
+    TextView infoModelo;
+    Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,14 +39,31 @@ public class ModeloFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_modelo, container, false);
+        unbinder = ButterKnife.bind(this, view);
         Button btn_modelo = (Button) view.findViewById(R.id.btn_modelo);
-        btn_modelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),ModeloActivity.class));
-            }
-        });
+        btn_modelo.setEnabled(false);
 
+        switch (MainActivity.opcion){
+            case "San Juan Evangelista":
+                infoModelo.setText(getResources().getString(R.string.info_modeloJuan));
+                break;
+            case "El Crucifijo":
+                infoModelo.setText(getResources().getString(R.string.info_modeloCrucifijo));
+                btn_modelo.setEnabled(true);
+                btn_modelo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), ModeloActivity.class));
+                    }
+                });
+                break;
+            case "Virgen de los Dolores":
+                infoModelo.setText(getResources().getString(R.string.info_modeloVirgen));
+                break;
+            case "El Señor del Huerto":
+                infoModelo.setText(getResources().getString(R.string.info_modeloHuerto));
+                break;
+        }
 
         return view;
     }
@@ -51,5 +71,6 @@ public class ModeloFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
     }
 }

@@ -42,7 +42,7 @@
             app:tab_icon="@drawable/ic_local_florist_white_24dp"
             app:tab_text="Flores" />
         <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_volume"
+            android:id="@+id/item_audio"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:tab_icon="@drawable/ic_volume_up_white_24dp"
@@ -63,10 +63,10 @@
             app:tab_text="Modelo"/>
 
         <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_citial"
+            android:id="@+id/item_download"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_event_seat_white_24dp"
+            app:tab_icon="@drawable/ic_file_download_white_24dp"
             app:tab_text="Citial" />
 
     </com.ss.bottomnavigation.BottomNavigation>

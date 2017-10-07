@@ -28,4 +28,9 @@
     <string name="sabiasMasVirgen"></string>
     <string name="sabiasMasCrucifijo"></string>
 
+    <string name="info_modeloJuan">No está disponible</string>
+    <string name="info_modeloHuerto">No está disponible</string>
+    <string name="info_modeloVirgen">No está disponible</string>
+    <string name="info_modeloCrucifijo">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D del Crucifijo </string>
+
 </resources>
