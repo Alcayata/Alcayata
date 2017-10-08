@@ -91,7 +91,7 @@ public class DescargaFragment extends Fragment {
         islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Log.e("firebase ",";local tem file created  created " +localFile.toString());
+                Log.e("firebase ",";archivo local ha sido creado " +localFile.toString());
                 Snackbar snackbar = Snackbar.make(view.findViewById(R.id.frag_descanrga),"Archivo descargado, desea abrirlo?",Snackbar.LENGTH_LONG)
                         .setAction("OPEN", new View.OnClickListener() {
                             @Override
@@ -104,7 +104,8 @@ public class DescargaFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("firebase ",";local tem file not created  created " + e.toString());
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.frag_descanrga),"archivo local no ha podido ser creado",Snackbar.LENGTH_SHORT);
+                snackbar.show();
             }
         });
 
@@ -121,7 +122,8 @@ public class DescargaFragment extends Fragment {
             startActivity(pdfOpenintent);
         }
         catch (ActivityNotFoundException e) {
-            Log.e("firebase ",";local tem file not created  created " + e.toString());
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.frag_descanrga),"archivo local no ha podido ser abierto",Snackbar.LENGTH_SHORT);
+            snackbar.show();
         }
     }
 
