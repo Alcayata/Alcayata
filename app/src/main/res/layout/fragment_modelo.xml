@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="frag_modelo"
+    android:id="@+id/frag_modelo"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment">
 

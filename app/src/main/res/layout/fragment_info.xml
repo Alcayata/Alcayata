@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:tag="infoFragment"
+    android:tag="frag_info"
+    android:id="@+id/frag_info"
     tools:context="com.senamoviles.alcayata.alcayata.MainFragments.InfoFragment">
 
 

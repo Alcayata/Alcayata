@@ -36,11 +36,11 @@
         app:mode="phone">
 
         <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_flower"
+            android:id="@+id/item_cita"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_local_florist_white_24dp"
-            app:tab_text="Flores" />
+            app:tab_icon="@drawable/ic_import_contacts_white_24dp"
+            app:tab_text="Referecia" />
         <com.ss.bottomnavigation.TabItem
             android:id="@+id/item_audio"
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:tab_icon="@drawable/ic_file_download_white_24dp"
-            app:tab_text="Citial" />
+            app:tab_text="PDF" />
 
     </com.ss.bottomnavigation.BottomNavigation>
 
