@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="frag_audio"
+    android:id="@+id/frag_audio"
     tools:context="com.senamoviles.alcayata.alcayata.MainFragments.AudioFragment">
 
     <!-- TODO: Update blank fragment layout -->

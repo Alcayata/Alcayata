@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
     public static String opcion = "San Juan Evangelista";
     public static final String TAG = "Semana Santa";
+    public static String tagfragment = "";
 
 
     @BindView(R.id.spinner)
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
 
     BeaconManager beaconManager;
+    Fragment currentFragment = null;
 
     Context context;
 
@@ -87,8 +89,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 Toast.makeText(MainActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
                 opcion = item.toString();
                 //recargar fragment Info
-                reloadInfoFragment();
-                //reloadModeloFragment();
+                currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
+                recargaFrag(currentFragment);
+
             }
         });
 
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                         transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
                         fragment = new InfoFragment();
                         break;
-                    case R.id.item_flower:
+                    case R.id.item_cita:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new FloresFragment());
                         fragment = new FloresFragment();
@@ -128,18 +131,35 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
     }
 
-    public void reloadInfoFragment(){
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
-        fragment = new InfoFragment();
-        transaction.commit();
-    }
+    public void recargaFrag(Fragment f){
+        if(f instanceof InfoFragment){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
+            fragment = new InfoFragment();
+            transaction.commit();
+        }else if(f instanceof FloresFragment){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_fragment_containers,new FloresFragment());
+            fragment = new FloresFragment();
+            transaction.commit();
 
-    public void reloadModeloFragment(){
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
-        fragment = new ModeloFragment();
-        transaction.commit();
+        }else if(f instanceof DescargaFragment){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_fragment_containers,new DescargaFragment());
+            fragment = new DescargaFragment();
+            transaction.commit();
+        }else if(f instanceof ModeloFragment){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
+            fragment = new ModeloFragment();
+            transaction.commit();
+        }else if(f instanceof AudioFragment){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_fragment_containers,new AudioFragment());
+            fragment = new AudioFragment();
+            transaction.commit();
+        }
+
     }
 
 
@@ -179,16 +199,14 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
                             switch (String.valueOf(oneBeacon.getId2())){
-                                case "6133":
-                                    //El señor del Huerto
-                                    opcion = "El Señor del Huerto";
-                                    //recargar fragment
+                                case "51626":
+                                    // San Juan Evangelista
+                                    opcion = "San Juan Evangelista";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
-                                    spinner.setSelectedIndex(3);
-                                    reloadInfoFragment();
-                                    //reloadModeloFragment();
-
+                                    spinner.setSelectedIndex(0);
+                                    recargaFrag(currentFragment);
                                     break;
                                 case "10903":
                                     //El crucifijo
@@ -196,24 +214,25 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                     opcion = "El Crucifijo";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(1);
-                                    reloadInfoFragment();
-                                    //reloadModeloFragment();
+
+                                    recargaFrag(currentFragment);
                                     break;
-                                case "51626":
-                                    // San Juan Evangelista
-                                    opcion = "San Juan Evangelista";
-                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
-                                    spinner.setSelectedIndex(0);
-                                    reloadInfoFragment();
-                                    //reloadModeloFragment();
-                                    break;
+
                                 case "43984":
                                     // Virgen de los Dolores
                                     opcion = "Virgen de los Dolores";
                                     Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(2);
-                                    reloadInfoFragment();
-                                    //reloadModeloFragment();
+
+                                    recargaFrag(currentFragment);
+                                    break;
+                                case "6133":
+                                    //El señor del Huerto
+                                    opcion = "El Señor del Huerto";
+                                    //recargar fragment
+                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    spinner.setSelectedIndex(3);
+                                    recargaFrag(currentFragment);
                                     break;
                             }
                         }
@@ -230,4 +249,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             e.printStackTrace();
         }
     }
+
+
 }
