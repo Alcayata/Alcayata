@@ -1,13 +1,19 @@
 package com.senamoviles.alcayata.alcayata;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -34,7 +40,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity implements BeaconConsumer {
+public class MainActivity extends AppCompatActivity implements BeaconConsumer{
+
+
+
 
     public static String opcion = "San Juan Evangelista";
     public static final String TAG = "Semana Santa";
@@ -49,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
     Fragment fragment = null;
     Fragment frg = null;
     private FragmentTransaction transaction;
+
+
+
     BeaconManager beaconManager;
 
     Context context;
@@ -113,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 transaction.commit();
             }
         });
+
     }
 
     public void reloadInfoFragment(){
