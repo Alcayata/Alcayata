@@ -1,5 +1,6 @@
 package com.senamoviles.alcayata.alcayata;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -7,9 +8,13 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     BeaconManager beaconManager;
     Fragment currentFragment = null;
 
+
     Context context;
 
 
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 Toast.makeText(MainActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
                 opcion = item.toString();
+
                 //recargar fragment Info
                 currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
                 recargaFrag(currentFragment);
@@ -99,11 +106,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             @Override
             public void onSelectedItemChanged(int i) {
                 switch (i){
-                    case R.id.item_3d:
+                    /*case R.id.item_3d:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
                         fragment = new ModeloFragment();
-                        break;
+                        break;*/
                     case R.id.item_paso:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
@@ -119,11 +126,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                         transaction.replace(R.id.frame_fragment_containers,new AudioFragment());
                         fragment = new AudioFragment();
                         break;
-                    case R.id.item_download:
+                    /*case R.id.item_download:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new DescargaFragment());
                         fragment = new DescargaFragment();
-                        break;
+                        break;*/
                 }
                 transaction.commit();
             }

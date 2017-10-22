@@ -22,11 +22,44 @@
         uno de los mayores secretos religiosos de Popayán?</string>
     <string name="sabiasCrucifijo">¿Sabías que ni los terremotos ni las guerras han causado
         la suspensión de las procesiones de Popayán?</string>
+    <string name="sabiasMasJuan">El paso del Santo Cristo de la Veracruz que sale en la procesión del Jueves
+            Santo es llamado así, “por cuanto tiene incrustada una partícula de la propia
+            Cruz, donde expiró el Salvador Divino”</string>
+    <string name="sabiasMasHuerto">En 1983 que ocurrió el terremoto se sacaron algunos pasos al día siguiente y
+            durante las guerras se declaraba un cese al fuego para acudir a los actos
+            religiosos. Las procesiones de Popayán cumplieron 461 años llevándose a
+            cabo de forma ininterrumpida</string>
+    <string name="sabiasMasVirgen">La imagen tiene un corazón de oro con diamantes y rubíes que en realidad
+            es un relicario donde se encontró un manuscrito de hace más de 230 años
+            con un voto de castidad escrito en latín y castellano antiguo por un devoto
+            jesuita llamado Ignacio Tenorio y Carvajal.</string>
+    <string name="sabiasMasCrucifijo">No existe mayor deshonra para un carguero de la Semana Santa de
+            Popayán que retirarse en una procesión, a esto se le llama pedirla y no
+            pasan de 15 personas las que llevan esta mancha. Algunos cargueros han
+            terminado con la clavícula fracturada e incluso encontrado la muerte
+            ejerciendo este oficio.
+    </string>
 
-    <string name="sabiasMasJuan"></string>
-    <string name="sabiasMasHuerto"></string>
-    <string name="sabiasMasVirgen"></string>
-    <string name="sabiasMasCrucifijo"></string>
+    <string name="refJuan">“vio a aquel discípulo a quien amaba Jesús,
+                            que los seguía, el que también en la cena
+                            se había recostado en su pecho”
+                            Juan C 21 V 20</string>
+    <string name="refHuerto">“Yendo un poco adelante,
+                              se postró sobre su rostro,
+                              orando y diciendo: Padre mío,
+                              si es posible, pase de mí esta copa;
+                              pero no sea como yo quiero,
+                              sino como tú”
+                              Mateo C 26 V 39</string>
+    <string name="refVirgen">“Entonces Jesús exclamó con fuerza:
+                              ¡Padre, en tus manos encomiendo mi espíritu!
+                              Y al decir esto, expiró”
+                              Lucas C 23 V 46</string>
+    <string name="refCrucifijo">“Dolida la Madre estaba junto a la Cruz
+                                 y lloraba mientras el Hijo;
+                                 cuya alma triste y llorosa.
+                                 Fiera espada tenía”
+                                 Secuencia Stabat Mater</string>
 
     <string name="info_modeloJuan">No está disponible</string>
     <string name="info_modeloHuerto">No está disponible</string>

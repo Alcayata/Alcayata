@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBack"
     tools:context="com.senamoviles.alcayata.alcayata.MainActivity">
+
 
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/spinner"
@@ -14,18 +16,19 @@
         app:ms_background_color="@color/colorPrimary"
         app:ms_text_color="@color/colorWhite"/>
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="460dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <FrameLayout
             android:id="@+id/frame_fragment_containers"
             android:layout_width="match_parent"
-            android:layout_height="460dp"/>
+            android:layout_height="0dp"
+            />
+
     </ScrollView>
 
- />
 
     <com.ss.bottomnavigation.BottomNavigation
         android:id="@+id/botton_nav"
@@ -55,7 +58,7 @@
             app:tab_icon="@drawable/ic_info_outline_white_24dp"
             app:tab_text="Paso" />
 
-        <com.ss.bottomnavigation.TabItem
+        <!--<com.ss.bottomnavigation.TabItem
             android:id="@+id/item_3d"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -66,8 +69,8 @@
             android:id="@+id/item_download"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_file_download_white_24dp"
-            app:tab_text="PDF" />
+            app:tab_icon="@drawable/ic_cloud_download_white_24dp"
+            app:tab_text="PDF" /> -->
 
     </com.ss.bottomnavigation.BottomNavigation>
 

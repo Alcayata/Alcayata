@@ -18,7 +18,7 @@ import com.senamoviles.alcayata.alcayata.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AudioFragment extends Fragment implements  View.OnClickListener, Runnable{
+public class AudioFragment extends Fragment implements  View.OnClickListener, Runnable {
 
     MediaPlayer mediaPlayer;
     ImageButton img_btn_play, img_btn_pause, img_btn_stop;
@@ -58,10 +58,10 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean input) {
 
-                seekBar.setMax(mediaPlayer.getDuration()/1000);
+                seekBar.setMax(mediaPlayer.getDuration() / 1000);
 
-                if (input){
-                    mediaPlayer.seekTo(progress*1000);
+                if (input) {
+                    mediaPlayer.seekTo(progress * 1000);
                 }
 
             }
@@ -77,7 +77,7 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
             }
         });
         return view;
-        }
+    }
 
 
     @Override
@@ -85,11 +85,11 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
         switch (view.getId()) {
 
             case R.id.img_btn_play:
-                if (mediaPlayer.isPlaying()){
+                if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     img_btn_play.setBackgroundResource(R.drawable.play);
 
-                }else {
+                } else {
                     mediaPlayer.start();
                     img_btn_play.setBackgroundResource(R.drawable.pause);
                 }
@@ -109,16 +109,10 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
 
     @Override
     public void run() {
-        if(mediaPlayer != null){
+        if (mediaPlayer != null) {
             int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
             soundseekBar.setProgress(mCurrentPosition);
         }
         handler.postDelayed(this, 1000);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
     }
 }
