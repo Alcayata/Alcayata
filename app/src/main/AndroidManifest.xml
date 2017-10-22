@@ -12,9 +12,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_alcayata"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_alcayata"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
@@ -30,7 +30,9 @@
         </activity>
         <activity android:name=".BienvenidaActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ModeloActivity"></activity>
+        <activity android:name=".ModeloActivity" />
+        <activity android:name=".DiaProcesiones" />
+        <activity android:name=".MenuPasos"></activity>
     </application>
 
 </manifest>
