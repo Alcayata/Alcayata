@@ -115,10 +115,4 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
         }
         handler.postDelayed(this, 1000);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
-    }
 }
