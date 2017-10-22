@@ -31,7 +31,6 @@
         <activity android:name=".BienvenidaActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ModeloActivity" />
-        <activity android:name=".dia_de_proceciones" />
         <activity android:name=".DiaProcesiones" />
         <activity android:name=".MenuPasos"></activity>
     </application>
