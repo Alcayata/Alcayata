@@ -16,6 +16,7 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 public class MenuPasos extends AppCompatActivity {
 
     private BoomMenuButton bmb;
+    String paso = "paso";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +27,19 @@ public class MenuPasos extends AppCompatActivity {
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
 
+
+
+
+
+
         HamButton.Builder builder = new HamButton.Builder()
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent=new Intent(MenuPasos.this, MainActivity.class);
+                        Intent intent = new Intent(MenuPasos.this,MainActivity.class);
+                        intent.putExtra(paso,"San Juan Evangelista");
                         startActivity(intent);
-                        //Toast.makeText(MenuPasos.this,"presionado: "+index,Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .normalImageRes(R.drawable.cruzamarilla)
@@ -48,7 +55,10 @@ public class MenuPasos extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Toast.makeText(MenuPasos.this,"presionado: "+index,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MenuPasos.this,MainActivity.class);
+                        intent.putExtra(paso,"El Señor del Huerto");
+                        startActivity(intent);
+
                     }
                 })
                 .normalImageRes(R.drawable.cruzamarilla)
@@ -63,7 +73,9 @@ public class MenuPasos extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Toast.makeText(MenuPasos.this,"presionado: "+index,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MenuPasos.this,MainActivity.class);
+                        intent.putExtra(paso,"El Crucifijo");
+                        startActivity(intent);
                     }
                 })
                 .normalImageRes(R.drawable.cruzamarilla)
@@ -78,9 +90,10 @@ public class MenuPasos extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        //Toast.makeText(MainActivity.this,"presionado: "+index,Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(MenuPasos.this, MainActivity.class);
+                        Intent intent = new Intent(MenuPasos.this,MainActivity.class);
+                        intent.putExtra(paso,"Virgen de los Dolores");
                         startActivity(intent);
+
                     }
                 })
                 .normalImageRes(R.drawable.cruzamarilla)

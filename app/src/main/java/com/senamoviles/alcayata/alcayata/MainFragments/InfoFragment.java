@@ -2,35 +2,33 @@ package com.senamoviles.alcayata.alcayata.MainFragments;
 
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.droidbyme.dialoglib.DroidDialog;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.senamoviles.alcayata.alcayata.MainActivity;
-import com.senamoviles.alcayata.alcayata.Paso;
 import com.senamoviles.alcayata.alcayata.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.senamoviles.alcayata.alcayata.MainActivity.opcion;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,17 +41,18 @@ public class InfoFragment extends Fragment {
     TextView txtDesc;
     @BindView(R.id.card_sabias)
     TextView cardSabias;
+
     Unbinder unbinder;
 
     String imagen = "drawable/";
+    @BindView(R.id.btnLeer)
+    Button btnLeer;
+    @BindView(R.id.btnEscuchar)
+    Button btnEscuchar;
 
-
-    //referencias a la base de datos Firebase
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("pasos");
-    ProgressDialog pDialog;
-    boolean isImageFitToScreen;
-
+    private String sabias;
+    private String sabiasMas;
+    Dialog dialog;
 
 
 
@@ -69,93 +68,115 @@ public class InfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         unbinder = ButterKnife.bind(this, view);
+        imgPaso.setClickable(true);
 
-        /*pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Cargando...");
+        switch (opcion) {
+            case "San Juan Evangelista":
+                txtDesc.setText(getResources().getText(R.string.descripcionJuan));
+                imgPaso.setImageResource(R.drawable.juan);
+                sabias = getResources().getString(R.string.sabiasJuan);
+                sabiasMas = getResources().getString(R.string.sabiasMasJuan);
 
-        pDialog.show();
-        Query query = myRef.orderByChild("nombre").equalTo(MainActivity.opcion);
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                break;
+            case "El Crucifijo":
+                txtDesc.setText(getResources().getString(R.string.descripcionCrucifijo));
+                imgPaso.setImageResource(R.drawable.crucifijo);
+                sabias = getResources().getString(R.string.sabiasCrucifijo);
+                sabiasMas = getResources().getString(R.string.sabiasMasCrucifijo);
+                break;
+            case "Virgen de los Dolores":
+                txtDesc.setText(getResources().getString(R.string.descripcionVirgen));
+                imgPaso.setImageResource(R.drawable.virgen);
+                sabias = getResources().getString(R.string.sabiasVirgen);
+                sabiasMas = getResources().getString(R.string.sabiasMasVirgen);
+                break;
+            case "El Señor del Huerto":
+                txtDesc.setText(getResources().getString(R.string.descripcionhuerto));
+                imgPaso.setImageResource(R.drawable.huerto);
+                sabias = getResources().getString(R.string.sabiasHuerto);
+                sabiasMas = getResources().getString(R.string.sabiasMasHuerto);
+                break;
+        }
 
-                Paso paso = dataSnapshot.getValue(Paso.class);
-                txtDesc.setText(paso.getDescripcion());
-                cardSabias.setText("Sabias Que...");
-                int resId = getResources().getIdentifier(imagen+paso.getImagen(),"drawable", getActivity().getPackageName());
-                imgPaso.setImageResource(resId);
-                pDialog.dismiss();
-
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });*/
-
-        cardSabias.setOnClickListener(new View.OnClickListener() {
+        imgPaso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DroidDialog.Builder(getActivity())
-                        .icon(R.drawable.ic_juan)
-                        .title("Sabias Qué?")
-                        .content("¿Sabías que vas a perder la especialización si no acabas rápido este código?")
-                        .cancelable(true,true)
-                        .positiveButton("Leer más", new DroidDialog.onPositiveListener() {
-                            @Override
-                            public void onPositive(Dialog dialog) {
-                                dialog.dismiss();
-                                new BottomDialog.Builder(getActivity())
-                                        .setTitle("Awesome!")
-                                        .setContent("What can we improve? Your feedback is always welcome.")
-                                        .show();
-                            }
-                        })
-                        .show();
-
-
+                mostrarImg();
             }
         });
 
 
 
-        switch (MainActivity.opcion){
-            case "San Juan Evangelista":
-                txtDesc.setText(getResources().getText(R.string.descripcionJuan));
-                cardSabias.setText(getResources().getText(R.string.sabiasJuan));
-                imgPaso.setImageResource(R.drawable.juan);
+        btnLeer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DroidDialog.Builder(getActivity())
+                        .icon(R.drawable.ic_juan)
+                        .title("¿Sabias Qué?")
+                        .content(sabias)
+                        .cancelable(true, true)
+                        .positiveButton("Leer más", new DroidDialog.onPositiveListener() {
+                            @Override
+                            public void onPositive(Dialog dialog) {
+                                dialog.dismiss();
+                                new BottomDialog.Builder(getActivity())
+                                        .setContent(sabiasMas)
+                                        .show();
+                            }
+                        })
+                        .show();
+            }
+        });
 
-                break;
-            case "El Crucifijo":
-                txtDesc.setText(getResources().getString(R.string.descripcionCrucifijo));
-                cardSabias.setText(getResources().getString(R.string.sabiasCrucifijo));
-                imgPaso.setImageResource(R.drawable.crucifijo);
-                break;
-            case "Virgen de los Dolores":
-                txtDesc.setText(getResources().getString(R.string.descripcionVirgen));
-                cardSabias.setText(getResources().getString(R.string.sabiasVirgen));
-                imgPaso.setImageResource(R.drawable.virgen);
-                break;
-            case "El Señor del Huerto":
-                txtDesc.setText(getResources().getString(R.string.descripcionhuerto));
-                cardSabias.setText(getResources().getString(R.string.sabiasHuerto));
-                imgPaso.setImageResource(R.drawable.huerto);
-                break;
-        }
+        btnEscuchar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarPlayer();
+            }
+        });
 
         return view;
     }
+
+    private void mostrarPlayer() {
+        FragmentManager fm = getFragmentManager();
+        AudioFragment dialogFragment = new AudioFragment ();
+        dialogFragment.show(fm, "Sample Fragment");
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+    private void mostrarImg(){
+        dialog = new Dialog(getActivity());
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(R.layout.image_dialog);
+
+        ImageView imageView = (ImageView) dialog.findViewById(R.id.imgDialog);
+        switch (opcion) {
+            case "San Juan Evangelista":
+                imageView.setImageResource(R.drawable.juan);break;
+            case "El Crucifijo":
+                imageView.setImageResource(R.drawable.crucifijo);break;
+            case "Virgen de los Dolores":
+                imageView.setImageResource(R.drawable.virgen);break;
+            case "El Señor del Huerto":
+                imageView.setImageResource(R.drawable.huerto);break;
+        }
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialog.show();
+    }
+
+
+
 }

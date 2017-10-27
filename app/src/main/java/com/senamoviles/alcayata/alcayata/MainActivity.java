@@ -1,30 +1,22 @@
 package com.senamoviles.alcayata.alcayata;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidbyme.dialoglib.DroidDialog;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.senamoviles.alcayata.alcayata.MainFragments.AudioFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.DescargaFragment;
-import com.senamoviles.alcayata.alcayata.MainFragments.FloresFragment;
+import com.senamoviles.alcayata.alcayata.MainFragments.CitaFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.InfoFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment;
 import com.ss.bottomnavigation.BottomNavigation;
@@ -49,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
 
 
-
-    public static String opcion = "San Juan Evangelista";
+    public static String opcion;
     public static final String TAG = "Semana Santa";
     public static String tagfragment = "";
 
@@ -80,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        opcion = getIntent().getExtras().getString("paso");
+
         frg = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
 
         beaconManager=BeaconManager.getInstanceForApplication(this);
@@ -87,12 +80,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 .setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
         beaconManager.bind(this);
 
-        bottonNav.setDefaultItem(2);
+        bottonNav.setDefaultItem(1);
         spinner.setItems("San Juan Evangelista","El Crucifijo","Virgen de los Dolores","El Señor del Huerto");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                Toast.makeText(MainActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
                 opcion = item.toString();
 
                 //recargar fragment Info
@@ -106,11 +98,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             @Override
             public void onSelectedItemChanged(int i) {
                 switch (i){
-                    /*case R.id.item_3d:
+                    case R.id.item_3d:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
                         fragment = new ModeloFragment();
-                        break;*/
+                        break;
                     case R.id.item_paso:
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
@@ -118,19 +110,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                         break;
                     case R.id.item_cita:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FloresFragment());
-                        fragment = new FloresFragment();
+                        transaction.replace(R.id.frame_fragment_containers,new CitaFragment());
+                        fragment = new CitaFragment();
                         break;
-                    case R.id.item_audio:
-                        transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new AudioFragment());
-                        fragment = new AudioFragment();
-                        break;
-                    /*case R.id.item_download:
-                        transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new DescargaFragment());
-                        fragment = new DescargaFragment();
-                        break;*/
                 }
                 transaction.commit();
             }
@@ -144,29 +126,18 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
             fragment = new InfoFragment();
             transaction.commit();
-        }else if(f instanceof FloresFragment){
+        }else if(f instanceof CitaFragment){
             transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_fragment_containers,new FloresFragment());
-            fragment = new FloresFragment();
+            transaction.replace(R.id.frame_fragment_containers,new CitaFragment());
+            fragment = new CitaFragment();
             transaction.commit();
 
-        }else if(f instanceof DescargaFragment){
-            transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_fragment_containers,new DescargaFragment());
-            fragment = new DescargaFragment();
-            transaction.commit();
         }else if(f instanceof ModeloFragment){
             transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
             fragment = new ModeloFragment();
             transaction.commit();
-        }else if(f instanceof AudioFragment){
-            transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_fragment_containers,new AudioFragment());
-            fragment = new AudioFragment();
-            transaction.commit();
         }
-
     }
 
 
@@ -200,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         });
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
-            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, final Region region) {
                 for(final Beacon oneBeacon : beacons) {
                     Log.d(TAG, "distancia: " + oneBeacon.getDistance() + " id:" + oneBeacon.getId1() + "/" + oneBeacon.getId2() + "/" + oneBeacon.getId3());
                     runOnUiThread(new Runnable() {
@@ -211,40 +182,39 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                 case "51626":
                                     // San Juan Evangelista
                                     opcion = "San Juan Evangelista";
-                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(0);
                                     recargaFrag(currentFragment);
                                     break;
+
+                                    //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+
                                 case "10903":
                                     //El crucifijo
                                     //card_desc.setDesc("Esta es la descripcion del paso El Crucifijo");
                                     opcion = "El Crucifijo";
-                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(1);
-
                                     recargaFrag(currentFragment);
                                     break;
 
                                 case "43984":
                                     // Virgen de los Dolores
                                     opcion = "Virgen de los Dolores";
-                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(2);
-
                                     recargaFrag(currentFragment);
                                     break;
                                 case "6133":
                                     //El señor del Huerto
                                     opcion = "El Señor del Huerto";
                                     //recargar fragment
-                                    Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
                                     spinner.setSelectedIndex(3);
                                     recargaFrag(currentFragment);
                                     break;
                             }
                         }
                     });
-
                 }
             }
 

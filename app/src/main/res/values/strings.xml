@@ -16,29 +16,28 @@
     <string name="sabiasJuan">¿Sabías que los cargueros de Popayán pueden terminar
         con el hombro reventado y prefieren morir antes que retirarse del paso durante el
         recorrido procesional?</string>
-    <string name="sabiasHuerto">¿Sabías que en la Cruz de un paso de la Semana Santa de Popayán
-        está incrustado un trozo de la verdadera Cruz de Cristo?</string>
+    <string name="sabiasHuerto">¿Sabías que ni los terremotos ni las guerras han causado
+        la suspensión de las procesiones de Popayán?</string>
     <string name="sabiasVirgen">¿Sabías que La Virgen de los Dolores lleva en el pecho
         uno de los mayores secretos religiosos de Popayán?</string>
-    <string name="sabiasCrucifijo">¿Sabías que ni los terremotos ni las guerras han causado
-        la suspensión de las procesiones de Popayán?</string>
-    <string name="sabiasMasJuan">El paso del Santo Cristo de la Veracruz que sale en la procesión del Jueves
-            Santo es llamado así, “por cuanto tiene incrustada una partícula de la propia
-            Cruz, donde expiró el Salvador Divino”</string>
+    <string name="sabiasCrucifijo">¿Sabías que en la Cruz de un paso de la Semana Santa de Popayán
+    está incrustado un trozo de la verdadera Cruz de Cristo?</string>
+    <string name="sabiasMasJuan">No existe mayor deshonra para un carguero de la Semana Santa de
+            Popayán que retirarse en una procesión, a esto se le llama pedirla y no
+            pasan de 15 personas las que llevan esta mancha. Algunos cargueros han
+            terminado con la clavícula fracturada e incluso encontrado la muerte
+            ejerciendo este oficio.</string>
     <string name="sabiasMasHuerto">En 1983 que ocurrió el terremoto se sacaron algunos pasos al día siguiente y
-            durante las guerras se declaraba un cese al fuego para acudir a los actos
-            religiosos. Las procesiones de Popayán cumplieron 461 años llevándose a
-            cabo de forma ininterrumpida</string>
+    durante las guerras se declaraba un cese al fuego para acudir a los actos
+    religiosos. Las procesiones de Popayán cumplieron 461 años llevándose a
+    cabo de forma ininterrumpida</string>
     <string name="sabiasMasVirgen">La imagen tiene un corazón de oro con diamantes y rubíes que en realidad
             es un relicario donde se encontró un manuscrito de hace más de 230 años
             con un voto de castidad escrito en latín y castellano antiguo por un devoto
             jesuita llamado Ignacio Tenorio y Carvajal.</string>
-    <string name="sabiasMasCrucifijo">No existe mayor deshonra para un carguero de la Semana Santa de
-            Popayán que retirarse en una procesión, a esto se le llama pedirla y no
-            pasan de 15 personas las que llevan esta mancha. Algunos cargueros han
-            terminado con la clavícula fracturada e incluso encontrado la muerte
-            ejerciendo este oficio.
-    </string>
+    <string name="sabiasMasCrucifijo">El paso del Santo Cristo de la Veracruz que sale en la procesión del Jueves
+    Santo es llamado así, “por cuanto tiene incrustada una partícula de la propia
+    Cruz, donde expiró el Salvador Divino”</string>
 
     <string name="refJuan">“vio a aquel discípulo a quien amaba Jesús,
                             que los seguía, el que también en la cena

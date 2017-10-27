@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.senamoviles.alcayata.alcayata.MainActivity;
@@ -28,6 +29,9 @@ public class ModeloFragment extends Fragment {
     @BindView(R.id.info_modelo)
     TextView infoModelo;
     Unbinder unbinder;
+    @BindView(R.id.imgModelo)
+    ImageView imgModelo;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +47,10 @@ public class ModeloFragment extends Fragment {
         Button btn_modelo = (Button) view.findViewById(R.id.btn_modelo);
         btn_modelo.setEnabled(false);
 
-        switch (MainActivity.opcion){
+        switch (MainActivity.opcion) {
             case "San Juan Evangelista":
                 infoModelo.setText(getResources().getString(R.string.info_modeloJuan));
+
                 break;
             case "El Crucifijo":
                 infoModelo.setText(getResources().getString(R.string.info_modeloCrucifijo));

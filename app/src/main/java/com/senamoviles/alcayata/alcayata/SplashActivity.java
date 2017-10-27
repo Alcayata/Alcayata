@@ -56,7 +56,7 @@ public class SplashActivity extends Activity {
                             e.apply();
                         }
                         else{
-                            Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                            Intent i = new Intent(SplashActivity.this, MenuPasos.class);
                             startActivity(i);
                         }
                     }

@@ -45,25 +45,30 @@
             app:tab_icon="@drawable/ic_import_contacts_white_24dp"
             app:tab_text="Referecia" />
         <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_volume_up_white_24dp"
-            app:tab_text="Audio"/>
-
-        <com.ss.bottomnavigation.TabItem
             android:id="@+id/item_paso"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:tab_icon="@drawable/ic_info_outline_white_24dp"
             app:tab_text="Paso" />
-
-        <!--<com.ss.bottomnavigation.TabItem
+        <com.ss.bottomnavigation.TabItem
             android:id="@+id/item_3d"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:tab_icon="@drawable/ic_3d_rotation_white_24dp"
             app:tab_text="Modelo"/>
+
+
+
+
+
+        <!--
+
+            <com.ss.bottomnavigation.TabItem
+            android:id="@+id/item_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_volume_up_white_24dp"
+            app:tab_text="Audio"/>
 
         <com.ss.bottomnavigation.TabItem
             android:id="@+id/item_download"

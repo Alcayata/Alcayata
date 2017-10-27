@@ -1,10 +1,12 @@
 package com.senamoviles.alcayata.alcayata.MainFragments;
 
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +17,20 @@ import android.widget.TextView;
 
 import com.senamoviles.alcayata.alcayata.R;
 
+import static com.senamoviles.alcayata.alcayata.MainActivity.opcion;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AudioFragment extends Fragment implements  View.OnClickListener, Runnable {
+public class AudioFragment extends DialogFragment implements  View.OnClickListener, Runnable {
 
     MediaPlayer mediaPlayer;
     ImageButton img_btn_play, img_btn_pause, img_btn_stop;
     SeekBar soundseekBar;
     TextView textview;
     Handler handler = new Handler();
+    String paso;
+
 
 
     @Override
@@ -42,10 +48,22 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
 
         img_btn_play = (ImageButton) view.findViewById(R.id.img_btn_play);
         img_btn_play.setOnClickListener(this);
-        img_btn_stop = (ImageButton) view.findViewById(R.id.img_btn_stop);
-        img_btn_stop.setOnClickListener(this);
         soundseekBar = (SeekBar) view.findViewById(R.id.soundSeekBar);
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.proyecto_voces_semana_santa);
+
+        switch (opcion) {
+            case "San Juan Evangelista":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.sabias_juan);
+                break;
+            case "El Crucifijo":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.sabias_crucifijo);
+                break;
+            case "Virgen de los Dolores":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.sabias_virgen);
+                break;
+            case "El Señor del Huerto":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.sabias_huerto);
+                break;
+        }
 
 
         this.run();
@@ -95,13 +113,6 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
                 }
 
                 break;
-
-            case R.id.img_btn_stop:
-
-                mediaPlayer.stop();
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.proyecto_voces_semana_santa);
-
-                break;
         }
 
 
@@ -114,5 +125,15 @@ public class AudioFragment extends Fragment implements  View.OnClickListener, Ru
             soundseekBar.setProgress(mCurrentPosition);
         }
         handler.postDelayed(this, 1000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mediaPlayer.isPlaying()) {
+            int mediaPlayer_position = mediaPlayer.getCurrentPosition();
+            getActivity().getSharedPreferences("PLAY_PAUSE", Context.MODE_PRIVATE).edit().putInt("CHECK_PLAY_PAUSE", mediaPlayer_position).apply();
+            mediaPlayer.pause();
+        }
     }
 }
