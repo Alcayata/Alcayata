@@ -9,28 +9,33 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <SeekBar
-        android:id="@+id/soundSeekBar"
-        style="@style/Widget.AppCompat.SeekBar"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        tools:layout_editor_absoluteX="8dp"
 
-        />
     <LinearLayout
-        android:layout_marginLeft="20dp"
+
+        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <ImageButton
             android:id="@+id/img_btn_play"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/play" />
+            android:background="@drawable/play"
+            />
 
+        <SeekBar
+
+
+            android:id="@+id/soundSeekBar"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:progressBackgroundTint="@color/colorWhite"
+            tools:progressTint="@color/colorPrimary" />
     </LinearLayout>
 
 </FrameLayout>
