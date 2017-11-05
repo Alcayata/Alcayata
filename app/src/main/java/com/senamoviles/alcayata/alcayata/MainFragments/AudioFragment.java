@@ -105,11 +105,11 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
             case R.id.img_btn_play:
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                    img_btn_play.setBackgroundResource(R.drawable.play);
+                    img_btn_play.setBackgroundResource(R.drawable.playblanco);
 
                 } else {
                     mediaPlayer.start();
-                    img_btn_play.setBackgroundResource(R.drawable.pause);
+                    img_btn_play.setBackgroundResource(R.drawable.botonpausa);
                 }
 
                 break;
