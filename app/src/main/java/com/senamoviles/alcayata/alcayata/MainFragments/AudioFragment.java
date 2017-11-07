@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -157,7 +158,10 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
                         img_btn_play.setBackgroundResource(R.drawable.pause);
                     }
                     else{
-                        Toast.makeText(getActivity(), "Conecta los audifonos para reproducir el audio", Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(getActivity(), "Conecta los audifonos para reproducir el audio", Toast.LENGTH_SHORT).show();
+                        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.viewSnack),"Conecta los audifonos para reproducir el audio",Snackbar.LENGTH_LONG);
+                        snackbar.show();
                     }
                 }
                 break;

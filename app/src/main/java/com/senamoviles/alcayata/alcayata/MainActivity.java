@@ -19,12 +19,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.droidbyme.dialoglib.DroidDialog;
@@ -36,6 +40,12 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.senamoviles.alcayata.alcayata.MainFragments.CitaFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.InfoFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment;
@@ -68,10 +78,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
-
-
-    @BindView(R.id.spinner)
-    MaterialSpinner spinner;
     @BindView(R.id.frame_fragment_containers)
     FrameLayout frameFragmentContainers;
     @BindView(R.id.botton_nav)
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     Fragment fragment = null;
     Fragment frg = null;
     private FragmentTransaction transaction;
+    BoomMenuButton bmb;
 
 
 
@@ -94,6 +101,25 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        ActionBar mActionBar = getSupportActionBar();
+        assert mActionBar != null;
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View actionBar = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) actionBar.findViewById(R.id.title_text);
+        mTitleTextView.setText(R.string.app_name);
+        mActionBar.setCustomView(actionBar);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0,0);
+
+        bmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_left_bmb);
+        bmb.setButtonEnum(ButtonEnum.Ham);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+        bmb.setNormalColor(R.color.white);
+
         opcion = getIntent().getExtras().getString("paso");
 
         frg = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
@@ -104,20 +130,80 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         beaconManager.bind(this);
 
         bottonNav.setDefaultItem(1);
-        spinner.setItems("San Juan Evangelista","El Crucifijo","Virgen de los Dolores","El Señor del Huerto");
-        spinner.setText(opcion);
 
-        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                opcion = item.toString();
+        HamButton.Builder builder = new HamButton.Builder()
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        opcion = "San Juan Evangelista";
+                        currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
+                        recargaFrag(currentFragment);
 
-                //recargar fragment Info
-                currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
-                recargaFrag(currentFragment);
 
-            }
-        });
+                    }
+                })
+                .normalImageRes(R.drawable.cruzamarilla)
+                .normalText("San Juan Evangelista")
+                .normalTextColor(Color.rgb(251,192,45))
+                .normalColor(Color.rgb(255, 255, 255)) //119,72,23 //53,5,23
+                .highlightedColor(Color.rgb(251,192,45))
+                .subNormalText("Imagen española del siglo XVIII");
+
+        bmb.addBuilder(builder);
+
+        HamButton.Builder builder1 = new HamButton.Builder()
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        opcion = "El Señor del Huerto";
+                        currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
+                        recargaFrag(currentFragment);
+
+                    }
+                })
+                .normalImageRes(R.drawable.cruzamarilla)
+                .normalText("El Señor del Huerto")
+                .normalTextColor(Color.rgb(251,192,45))
+                .normalColor(Color.rgb(255, 255, 255))
+                .highlightedColor(Color.rgb(251,192,45))
+                .subNormalText("Talla quiteña del siglo XVII");
+        bmb.addBuilder(builder1);
+
+        HamButton.Builder builder2 = new HamButton.Builder()
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        opcion = "El Crucifijo";
+                        currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
+                        recargaFrag(currentFragment);
+                    }
+                })
+                .normalImageRes(R.drawable.cruzamarilla)
+                .normalText("El Crucifijo")
+                .normalColor(Color.rgb(255, 255, 255))
+                .normalTextColor(Color.rgb(251,192,45))
+                .highlightedColor(Color.rgb(251,192,45))
+                .subNormalText("Imagene española del siglo XVIII");
+        bmb.addBuilder(builder2);
+
+        HamButton.Builder builder3 = new HamButton.Builder()
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        opcion = "Virgen de los Dolores";
+                        currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
+                        recargaFrag(currentFragment);
+
+
+                    }
+                })
+                .normalImageRes(R.drawable.cruzamarilla)
+                .normalText("Virgen de los Dolores")
+                .normalColor(Color.rgb(255, 255, 255))
+                .normalTextColor(Color.rgb(251,192,45))
+                .highlightedColor(Color.rgb(251,192,45))
+                .subNormalText("Imágen colombiana del siglo XX");
+        bmb.addBuilder(builder3);
 
 
 
@@ -313,7 +399,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                 case "51626":
                                     // San Juan Evangelista
                                     opcion = "San Juan Evangelista";
-                                    spinner.setSelectedIndex(0);
                                     recargaFrag(currentFragment);
                                     break;
 
@@ -324,7 +409,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                     //card_desc.setDesc("Esta es la descripcion del paso El Crucifijo");
                                     opcion = "El Crucifijo";
                                     //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
-                                    spinner.setSelectedIndex(1);
                                     recargaFrag(currentFragment);
                                     break;
 
@@ -332,7 +416,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                     // Virgen de los Dolores
                                     opcion = "Virgen de los Dolores";
                                     //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
-                                    spinner.setSelectedIndex(2);
                                     recargaFrag(currentFragment);
                                     break;
                                 case "6133":
@@ -340,7 +423,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                                     opcion = "El Señor del Huerto";
                                     //recargar fragment
                                     //Toast.makeText(MainActivity.this, opcion, Toast.LENGTH_SHORT).show();
-                                    spinner.setSelectedIndex(3);
                                     recargaFrag(currentFragment);
                                     break;
                             }

@@ -34,6 +34,7 @@ public class MenuPasos extends AppCompatActivity {
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, "Tu dispositivo no soporta bluetooth", Toast.LENGTH_SHORT).show();
+
         }
         else{
             if (!mBluetoothAdapter.isEnabled()) {
@@ -41,9 +42,6 @@ public class MenuPasos extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         }
-
-
-
 
 
 
