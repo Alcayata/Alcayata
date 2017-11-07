@@ -60,10 +60,10 @@
                                  Fiera espada tenía”
                                  Secuencia Stabat Mater</string>
 
-    <string name="info_modeloJuan">No está disponible</string>
-    <string name="info_modeloHuerto">No está disponible</string>
-    <string name="info_modeloVirgen">No está disponible</string>
-    <string name="info_modeloCrucifijo">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D del Crucifijo </string>
+    <string name="info_modeloJuan">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D San Juan Evangelista</string>
+    <string name="info_modeloHuerto">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D de El Señor del Huerto</string>
+    <string name="info_modeloVirgen">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D de La Virgen de los Dolores</string>
+    <string name="info_modeloCrucifijo">Disfruta como nunca antes la Semana Mayor, explora el modelo 3D de El Crucifijo </string>
 
     <string name="sabiasque">¿Sabías que en uno de los pasos de la Procesión del Amo Jesús est´incrustado un pedazo de la versdadera cruz de Cristo?</string>
 

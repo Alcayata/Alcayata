@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:ms_background_color="@color/colorPrimary"
-        app:ms_text_color="@color/colorWhite"/>
+        app:ms_text_color="@color/colorWhite"
+        android:textSize="15sp"
+        android:elevation="10dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,6 +30,12 @@
             />
 
     </ScrollView>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/viewSnack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
     <com.ss.bottomnavigation.BottomNavigation
@@ -56,26 +64,6 @@
             android:layout_height="match_parent"
             app:tab_icon="@drawable/ic_3d_rotation_white_24dp"
             app:tab_text="Modelo"/>
-
-
-
-
-
-        <!--
-
-            <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_volume_up_white_24dp"
-            app:tab_text="Audio"/>
-
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/item_download"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:tab_icon="@drawable/ic_cloud_download_white_24dp"
-            app:tab_text="PDF" /> -->
 
     </com.ss.bottomnavigation.BottomNavigation>
 

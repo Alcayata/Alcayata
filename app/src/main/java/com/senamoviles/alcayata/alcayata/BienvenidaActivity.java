@@ -1,6 +1,7 @@
 package com.senamoviles.alcayata.alcayata;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -31,14 +32,14 @@ public class BienvenidaActivity extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         //super.onSkipPressed(currentFragment);
-        Intent intent = new Intent(this,DiaProcesiones.class);
+        Intent intent = new Intent(this,MenuPasos.class);
         startActivity(intent);
 
     }
     @Override
     public void onDonePressed(Fragment currentFragment) {
         //super.onDonePressed(currentFragment);
-        Intent intent = new Intent(this,DiaProcesiones.class);
+        Intent intent = new Intent(this,MenuPasos.class);
         startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.senamoviles.alcayata.alcayata;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
 public class MenuPasos extends AppCompatActivity {
 
+    private static final int REQUEST_ENABLE_BT = 1;
     private BoomMenuButton bmb;
     String paso = "paso";
     @Override
@@ -26,6 +28,19 @@ public class MenuPasos extends AppCompatActivity {
         bmb.setButtonEnum(ButtonEnum.Ham);
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+        bmb.setAutoBoom(true);
+
+
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "Tu dispositivo no soporta bluetooth", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
 
 
 

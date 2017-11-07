@@ -20,7 +20,7 @@
         app:bmb_buttonPlaceEnum="buttonPlace_ham_4"
         app:bmb_autoBoom="true"
         app:bmb_normalColor="@color/colorAccent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
 
 

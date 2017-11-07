@@ -50,6 +50,13 @@ public class ModeloFragment extends Fragment {
         switch (MainActivity.opcion) {
             case "San Juan Evangelista":
                 infoModelo.setText(getResources().getString(R.string.info_modeloJuan));
+                btn_modelo.setEnabled(true);
+                btn_modelo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), ModeloActivity.class));
+                    }
+                });
 
                 break;
             case "El Crucifijo":
@@ -64,9 +71,23 @@ public class ModeloFragment extends Fragment {
                 break;
             case "Virgen de los Dolores":
                 infoModelo.setText(getResources().getString(R.string.info_modeloVirgen));
+                btn_modelo.setEnabled(true);
+                btn_modelo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), ModeloActivity.class));
+                    }
+                });
                 break;
             case "El Señor del Huerto":
                 infoModelo.setText(getResources().getString(R.string.info_modeloHuerto));
+                btn_modelo.setEnabled(true);
+                btn_modelo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), ModeloActivity.class));
+                    }
+                });
                 break;
         }
 

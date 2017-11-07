@@ -1,21 +1,41 @@
 package com.senamoviles.alcayata.alcayata;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.droidbyme.dialoglib.DroidDialog;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.senamoviles.alcayata.alcayata.MainFragments.AudioFragment;
-import com.senamoviles.alcayata.alcayata.MainFragments.DescargaFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.CitaFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.InfoFragment;
 import com.senamoviles.alcayata.alcayata.MainFragments.ModeloFragment;
@@ -31,6 +51,7 @@ import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.io.File;
 import java.util.Collection;
 
 import butterknife.BindView;
@@ -44,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     public static String opcion;
     public static final String TAG = "Semana Santa";
     public static String tagfragment = "";
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
 
 
     @BindView(R.id.spinner)
@@ -60,9 +84,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
     BeaconManager beaconManager;
     Fragment currentFragment = null;
-
-
-    Context context;
+    String nombrePaso = "";
+    String nombreArchivo = "";
 
 
     @Override
@@ -82,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
         bottonNav.setDefaultItem(1);
         spinner.setItems("San Juan Evangelista","El Crucifijo","Virgen de los Dolores","El Señor del Huerto");
+        spinner.setText(opcion);
+
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
@@ -93,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
             }
         });
+
+
 
         bottonNav.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
             @Override
@@ -118,6 +145,110 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
             }
         });
 
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (opcion){
+            case "San Juan Evangelista":
+                nombrePaso = "sanjuan.pdf";
+                nombreArchivo = "san_juan_evangelista.pdf";
+                break;
+            case "El Crucifijo":
+                nombrePaso = "crucifijo.pdf";
+                nombreArchivo = "el_crucifijo.pdf";
+                break;
+            case "Virgen de los Dolores":
+                nombrePaso = "dolorosa.pdf";
+                nombreArchivo = "vigen_de_los_dolores.pdf";
+                break;
+            case "El Señor del Huerto":
+                nombrePaso = "huerto.pdf";
+                nombreArchivo = "el_señor_del_huerto.pdf";
+                break;
+        }
+        int id = item.getItemId();
+        if(id == R.id.item_descarga){
+            new DroidDialog.Builder(this)
+                    .icon(R.drawable.ic_juan)
+                    .title("Descargar PDF")
+                    .content("Estas deacuerdo para descargar el archivo pdf de la nube?")
+                    .cancelable(true, true)
+                    .color(ContextCompat.getColor(this, R.color.colorPrimaryDark), Color.WHITE, Color.DKGRAY)
+                    .positiveButton("descargar", new DroidDialog.onPositiveListener() {
+                        @Override
+                        public void onPositive(Dialog dialog) {
+                            downloadFile();
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void downloadFile(){
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://alcayata-2017.appspot.com/");
+        StorageReference islandRef = storageRef.child("PDF").child(nombrePaso);
+
+        File rootPath = new File(Environment.getExternalStorageDirectory(), "SemanaSantaPopayan");
+        if(!rootPath.exists()) {
+            rootPath.mkdirs();
+        }
+
+        Log.e("firebase ",";El nombre del paso es " +nombrePaso);
+        final File localFile = new File(rootPath,nombreArchivo);
+        Log.e("firebase ",";El nombre del archivo es " +localFile);
+
+        islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Log.e("firebase ",";archivo local ha sido creado " +localFile.toString());
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"Archivo descargado, desea abrirlo?",Snackbar.LENGTH_LONG)
+                        .setAction("OPEN", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                openFile();
+                            }
+                        });
+                snackbar.show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"1archivo local no ha podido ser creado",Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        });
+
+    }
+
+    public void openFile(){
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "SemanaSantaPopayan/"+nombreArchivo);
+        Uri path = Uri.fromFile(file);
+        Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+        pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pdfOpenintent.setDataAndType(path, "application/pdf");
+        try {
+            startActivity(pdfOpenintent);
+        }
+        catch (ActivityNotFoundException e) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"archivo local no ha podido ser abierto",Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
     }
 
     public void recargaFrag(Fragment f){
