@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
         ButterKnife.bind(this);
 
         verifyStoragePermissions(this);
+        verifyFilePermision(this);
 
         ActionBar mActionBar = getSupportActionBar();
         assert mActionBar != null;
@@ -366,13 +367,22 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
     }
 
     public void openFile() {
-        verifyFilePermision(this);
         File file = new File(Environment.getExternalStorageDirectory(),
                 "SemanaSantaPopayan/"+nombreArchivo);
-        //Uri path = Uri.fromFile(file);
-        Uri path = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".provider", file);
+
+
+        Uri path;
+        if(Build.VERSION.SDK_INT >= 23){
+            path = FileProvider.getUriForFile(MainActivity.this,
+                    getApplicationContext().getPackageName() + ".provider",
+                    file);
+        } else{
+            path = Uri.fromFile(file);
+        }
+        //Uri path = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".provider", file);
         Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
         pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pdfOpenintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         pdfOpenintent.setDataAndType(path, "application/pdf");
         try {
             startActivity(pdfOpenintent);
@@ -383,24 +393,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
         }
     }
 
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_GROUPSTORAGE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission Granted
-
-            } else {
-                // Permission Denied
-                //Toast.makeText(mContext, "PERMISSION_GROUPSTORAGE Denied", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-    }
 
     public void recargaFrag(Fragment f){
         if(f instanceof InfoFragment){
