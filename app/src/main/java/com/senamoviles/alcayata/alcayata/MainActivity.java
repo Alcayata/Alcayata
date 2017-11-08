@@ -3,6 +3,8 @@ package com.senamoviles.alcayata.alcayata;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +21,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +43,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
@@ -68,10 +74,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity implements BeaconConsumer{
+public class MainActivity extends AppCompatActivity implements BeaconConsumer {
 
 
-
+    private static final int PERMISSION_GROUPSTORAGE = 1;
     public static String opcion;
     public static final String TAG = "Semana Santa";
     public static String tagfragment = "";
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     Fragment frg = null;
     private FragmentTransaction transaction;
     BoomMenuButton bmb;
-
+    ProgressBar progressBar;
 
 
     BeaconManager beaconManager;
@@ -94,12 +100,50 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
     String nombrePaso = "";
     String nombreArchivo = "";
 
+    // Storage Permissions variables
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    private static String[] PERMISSION_GROUP = {
+            android.Manifest.permission_group.STORAGE
+    };
+
+    //persmission method.
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have read or write permission
+        int writePermission = ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int readPermission = ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public static void verifyFilePermision(Activity activity) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int hasPermission = ActivityCompat.checkSelfPermission(activity, android.Manifest.permission_group.STORAGE);
+            if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, PERMISSION_GROUP, PERMISSION_GROUPSTORAGE);
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        verifyStoragePermissions(this);
 
         ActionBar mActionBar = getSupportActionBar();
         assert mActionBar != null;
@@ -112,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         mTitleTextView.setText(R.string.app_name);
         mActionBar.setCustomView(actionBar);
         mActionBar.setDisplayShowCustomEnabled(true);
-        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0,0);
+        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
 
         bmb = (BoomMenuButton) actionBar.findViewById(R.id.action_bar_left_bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
@@ -124,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
         frg = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
 
-        beaconManager=BeaconManager.getInstanceForApplication(this);
+        beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser()
                 .setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
         beaconManager.bind(this);
@@ -144,9 +188,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 })
                 .normalImageRes(R.drawable.ico_juan)
                 .normalText("San Juan Evangelista")
-                .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(171,138,152)) //119,72,23
-                .highlightedColor(Color.rgb(53,5,23))
+                .normalTextColor(Color.rgb(53, 5, 23))
+                .normalColor(Color.rgb(255, 255, 255)) //119,72,23
+                .highlightedColor(Color.rgb(53, 5, 23))
                 .subNormalText("Imagen española del siglo XVIII");
 
         bmb.addBuilder(builder);
@@ -163,9 +207,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 })
                 .normalImageRes(R.drawable.ico_huerto)
                 .normalText("El Señor del Huerto")
-                .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(171,138,152)) //119,72,23
-                .highlightedColor(Color.rgb(53,5,23))
+                .normalTextColor(Color.rgb(53, 5, 23))
+                .normalColor(Color.rgb(255, 255, 255)) //119,72,23
+                .highlightedColor(Color.rgb(53, 5, 23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder1);
 
@@ -180,9 +224,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 })
                 .normalImageRes(R.drawable.ico_crucifijo)
                 .normalText("El Crucifijo")
-                .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(171,138,152)) //119,72,23
-                .highlightedColor(Color.rgb(53,5,23))
+                .normalTextColor(Color.rgb(53, 5, 23))
+                .normalColor(Color.rgb(255, 255, 255)) //119,72,23
+                .highlightedColor(Color.rgb(53, 5, 23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder2);
 
@@ -199,31 +243,30 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 })
                 .normalImageRes(R.drawable.ico_dolorosa)
                 .normalText("Virgen de los Dolores")
-                .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(171,138,152)) //119,72,23
-                .highlightedColor(Color.rgb(53,5,23))
+                .normalTextColor(Color.rgb(53, 5, 23))
+                .normalColor(Color.rgb(255, 255, 255)) //119,72,23
+                .highlightedColor(Color.rgb(53, 5, 23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder3);
-
 
 
         bottonNav.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
             @Override
             public void onSelectedItemChanged(int i) {
-                switch (i){
+                switch (i) {
                     case R.id.item_3d:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new ModeloFragment());
+                        transaction.replace(R.id.frame_fragment_containers, new ModeloFragment());
                         fragment = new ModeloFragment();
                         break;
                     case R.id.item_paso:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new InfoFragment());
+                        transaction.replace(R.id.frame_fragment_containers, new InfoFragment());
                         fragment = new InfoFragment();
                         break;
                     case R.id.item_cita:
                         transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new CitaFragment());
+                        transaction.replace(R.id.frame_fragment_containers, new CitaFragment());
                         fragment = new CitaFragment();
                         break;
                 }
@@ -243,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (opcion){
+        switch (opcion) {
             case "San Juan Evangelista":
                 nombrePaso = "sanjuan.pdf";
                 nombreArchivo = "san_juan_evangelista.pdf";
@@ -262,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 break;
         }
         int id = item.getItemId();
-        if(id == R.id.item_descarga){
+        if (id == R.id.item_descarga) {
             new DroidDialog.Builder(this)
                     .icon(R.drawable.ic_juan)
                     .title("Descargar PDF")
@@ -272,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                     .positiveButton("descargar", new DroidDialog.onPositiveListener() {
                         @Override
                         public void onPositive(Dialog dialog) {
+
                             downloadFile();
                             dialog.dismiss();
                         }
@@ -283,26 +327,26 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         return super.onOptionsItemSelected(item);
     }
 
-    public void downloadFile(){
+    public void downloadFile() {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl("gs://alcayata-2017.appspot.com/");
         StorageReference islandRef = storageRef.child("PDF").child(nombrePaso);
 
         File rootPath = new File(Environment.getExternalStorageDirectory(), "SemanaSantaPopayan");
-        if(!rootPath.exists()) {
+        if (!rootPath.exists()) {
             rootPath.mkdirs();
         }
 
-        Log.e("firebase ",";El nombre del paso es " +nombrePaso);
-        final File localFile = new File(rootPath,nombreArchivo);
-        Log.e("firebase ",";El nombre del archivo es " +localFile);
+        Log.e("firebase ", ";El nombre del paso es " + nombrePaso);
+        final File localFile = new File(rootPath, nombreArchivo);
+        Log.e("firebase ", ";El nombre del archivo es " + localFile);
 
         islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Log.e("firebase ",";archivo local ha sido creado " +localFile.toString());
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"Archivo descargado, desea abrirlo?",Snackbar.LENGTH_LONG)
+                Log.e("firebase ", ";archivo local ha sido creado " + localFile.toString());
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack), "Archivo descargado, desea abrirlo?", Snackbar.LENGTH_LONG)
                         .setAction("OPEN", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -314,17 +358,19 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"1archivo local no ha podido ser creado",Snackbar.LENGTH_SHORT);
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack), "1archivo local no ha podido ser creado", Snackbar.LENGTH_SHORT);
                 snackbar.show();
             }
         });
 
     }
 
-    public void openFile(){
+    public void openFile() {
+        verifyFilePermision(this);
         File file = new File(Environment.getExternalStorageDirectory(),
                 "SemanaSantaPopayan/"+nombreArchivo);
-        Uri path = Uri.fromFile(file);
+        //Uri path = Uri.fromFile(file);
+        Uri path = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".provider", file);
         Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
         pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         pdfOpenintent.setDataAndType(path, "application/pdf");
@@ -334,6 +380,25 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         catch (ActivityNotFoundException e) {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.viewSnack),"archivo local no ha podido ser abierto",Snackbar.LENGTH_SHORT);
             snackbar.show();
+        }
+    }
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_GROUPSTORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+
+            } else {
+                // Permission Denied
+                //Toast.makeText(mContext, "PERMISSION_GROUPSTORAGE Denied", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 
