@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 .normalImageRes(R.drawable.ico_juan)
                 .normalText("San Juan Evangelista")
                 .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
                 .subNormalText("Imagen española del siglo XVIII");
 
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 .normalImageRes(R.drawable.ico_huerto)
                 .normalText("El Señor del Huerto")
                 .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder1);
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 .normalImageRes(R.drawable.ico_crucifijo)
                 .normalText("El Crucifijo")
                 .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder2);
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                 .normalImageRes(R.drawable.ico_dolorosa)
                 .normalText("Virgen de los Dolores")
                 .normalTextColor(Color.rgb(53,5,23))
-                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
                 .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder3);
