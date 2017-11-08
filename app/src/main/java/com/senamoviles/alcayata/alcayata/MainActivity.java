@@ -317,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                         @Override
                         public void onPositive(Dialog dialog) {
 
+
                             downloadFile();
                             dialog.dismiss();
                         }
