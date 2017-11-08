@@ -13,9 +13,13 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 
 public class BienvenidaActivity extends AppIntro {
 
+    private BluetoothAdapter  BA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        BA = BluetoothAdapter.getDefaultAdapter();
 
         addSlide(AppIntroFragment.newInstance("Bienvenido!","Disfruta una increible experiencia  durante el recorrido procesional",
                 R.drawable.logo, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));

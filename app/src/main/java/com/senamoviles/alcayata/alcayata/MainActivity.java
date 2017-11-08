@@ -142,11 +142,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
                     }
                 })
-                .normalImageRes(R.drawable.cruzamarilla)
+                .normalImageRes(R.drawable.ico_juan)
                 .normalText("San Juan Evangelista")
-                .normalTextColor(Color.rgb(251,192,45))
-                .normalColor(Color.rgb(255, 255, 255)) //119,72,23 //53,5,23
-                .highlightedColor(Color.rgb(251,192,45))
+                .normalTextColor(Color.rgb(53,5,23))
+                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .highlightedColor(Color.rgb(53,5,23))
                 .subNormalText("Imagen española del siglo XVIII");
 
         bmb.addBuilder(builder);
@@ -161,12 +161,12 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
                     }
                 })
-                .normalImageRes(R.drawable.cruzamarilla)
+                .normalImageRes(R.drawable.ico_huerto)
                 .normalText("El Señor del Huerto")
-                .normalTextColor(Color.rgb(251,192,45))
-                .normalColor(Color.rgb(255, 255, 255))
-                .highlightedColor(Color.rgb(251,192,45))
-                .subNormalText("Talla quiteña del siglo XVII");
+                .normalTextColor(Color.rgb(53,5,23))
+                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .highlightedColor(Color.rgb(53,5,23))
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder1);
 
         HamButton.Builder builder2 = new HamButton.Builder()
@@ -178,12 +178,12 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
                         recargaFrag(currentFragment);
                     }
                 })
-                .normalImageRes(R.drawable.cruzamarilla)
+                .normalImageRes(R.drawable.ico_crucifijo)
                 .normalText("El Crucifijo")
-                .normalColor(Color.rgb(255, 255, 255))
-                .normalTextColor(Color.rgb(251,192,45))
-                .highlightedColor(Color.rgb(251,192,45))
-                .subNormalText("Imagene española del siglo XVIII");
+                .normalTextColor(Color.rgb(53,5,23))
+                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .highlightedColor(Color.rgb(53,5,23))
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder2);
 
         HamButton.Builder builder3 = new HamButton.Builder()
@@ -197,12 +197,12 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
 
                     }
                 })
-                .normalImageRes(R.drawable.cruzamarilla)
+                .normalImageRes(R.drawable.ico_dolorosa)
                 .normalText("Virgen de los Dolores")
-                .normalColor(Color.rgb(255, 255, 255))
-                .normalTextColor(Color.rgb(251,192,45))
-                .highlightedColor(Color.rgb(251,192,45))
-                .subNormalText("Imágen colombiana del siglo XX");
+                .normalTextColor(Color.rgb(53,5,23))
+                .normalColor(Color.rgb(255,255,255)) //119,72,23
+                .highlightedColor(Color.rgb(53,5,23))
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder3);
 
 

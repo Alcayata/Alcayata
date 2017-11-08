@@ -155,7 +155,7 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
                 } else {
                     if(audioManager.isWiredHeadsetOn()){
                         mediaPlayer.start();
-                        img_btn_play.setBackgroundResource(R.drawable.pause);
+                        img_btn_play.setBackgroundResource(R.drawable.botonpausa);
                     }
                     else{
 

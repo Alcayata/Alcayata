@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:elevation="4dp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:layout_marginTop="5dp"/>
 
 
         <android.support.v7.widget.CardView
