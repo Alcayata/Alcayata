@@ -238,8 +238,6 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                         opcion = "Virgen de los Dolores";
                         currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_fragment_containers);
                         recargaFrag(currentFragment);
-
-
                     }
                 })
                 .normalImageRes(R.drawable.ico_dolorosa)
