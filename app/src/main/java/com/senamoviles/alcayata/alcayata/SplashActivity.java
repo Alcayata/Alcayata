@@ -3,10 +3,9 @@ package com.senamoviles.alcayata.alcayata;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 
 public class SplashActivity extends Activity {
@@ -32,10 +31,10 @@ public class SplashActivity extends Activity {
                                 .getDefaultSharedPreferences(getBaseContext());
 
                         //  Create a new boolean and preference and set it to true
-                        boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+                        //boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
 
                         //  If the activity has never started before...
-                        if (isFirstStart) {
+                        //if (isFirstStart) {
 
                             //  Launch app intro
                             final Intent i = new Intent(SplashActivity.this, BienvenidaActivity.class);
@@ -54,11 +53,11 @@ public class SplashActivity extends Activity {
 
                             //  Apply changes
                             e.apply();
-                        }
-                        else{
-                            Intent i = new Intent(SplashActivity.this, MenuPasos.class);
-                            startActivity(i);
-                        }
+                        //}
+                        //else{
+                        //    Intent i = new Intent(SplashActivity.this, MenuPasos.class);
+                        //    startActivity(i);
+                        //}
                     }
                 });
 
