@@ -264,9 +264,9 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer{
         int id = item.getItemId();
         if(id == R.id.item_descarga){
             new DroidDialog.Builder(this)
-                    .icon(R.drawable.ic_juan)
+                    .icon(R.drawable.ic_pdf)
                     .title("Descargar PDF")
-                    .content("Estas deacuerdo para descargar el archivo pdf de la nube?")
+                    .content("Deseas descargar el archivo PDF a tu télefono?")
                     .cancelable(true, true)
                     .color(ContextCompat.getColor(this, R.color.colorPrimaryDark), Color.WHITE, Color.DKGRAY)
                     .positiveButton("descargar", new DroidDialog.onPositiveListener() {
