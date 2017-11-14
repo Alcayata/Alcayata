@@ -16,7 +16,7 @@
 
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:elevation="4dp">
@@ -24,8 +24,9 @@
             <ImageView
                 android:id="@+id/imgModelo"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="350dp"/>
 
+                /*android:src="@drawable/img_paso_tut"/*/
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView

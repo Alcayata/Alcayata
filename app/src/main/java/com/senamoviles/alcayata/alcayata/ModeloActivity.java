@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.gerard.UnityPlayerActivity;
+
+import com.senamoviles.UnityPlayerActivity;
 
 public class ModeloActivity extends AppCompatActivity {
 

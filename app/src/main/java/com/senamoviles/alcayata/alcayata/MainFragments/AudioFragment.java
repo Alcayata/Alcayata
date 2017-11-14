@@ -1,10 +1,12 @@
 package com.senamoviles.alcayata.alcayata.MainFragments;
 
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,10 +15,12 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +31,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidbyme.dialoglib.DroidDialog;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.senamoviles.alcayata.alcayata.R;
 
 import static android.content.Context.SENSOR_SERVICE;
@@ -49,7 +55,8 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
     boolean isHeadsetOn;
     BroadcastReceiver broadReceiver;
     Context context;
-    IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+    //IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+    IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
 
 
 
@@ -80,12 +87,25 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
         audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         broadReceiver = new BroadcastReceiver() {
+
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                if (intent.getAction().equals(audioManager.ACTION_AUDIO_BECOMING_NOISY)) {
-                    mediaPlayer.pause();
+                if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
+                    int state = intent.getIntExtra("state", -1);
+                    switch (state) {
+                        case 0:
+                            mediaPlayer.pause();
+                            break;
+                        case 1:
+                           // Log.d(TAG, "Headset plugged");
+                            break;
+                    }
                 }
+
+                /*if (intent.getAction().equals(audioManager.ACTION_AUDIO_BECOMING_NOISY)) {
+                    mediaPlayer.pause();
+                }*/
             }
         };
 
@@ -116,20 +136,15 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
         soundseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean input) {
-
                 seekBar.setMax(mediaPlayer.getDuration() / 1000);
-
                 if (input) {
                     mediaPlayer.seekTo(progress * 1000);
                 }
-
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
@@ -158,10 +173,22 @@ public class AudioFragment extends DialogFragment implements  View.OnClickListen
                         img_btn_play.setBackgroundResource(R.drawable.botonpausa);
                     }
                     else{
-
+                        new DroidDialog.Builder(getActivity())
+                                .icon(R.drawable.ic_juan)
+                                .title("Importante!")
+                                .content("Conecta los audifonos para reproducir el audio")
+                                .cancelable(true, true)
+                                .color(ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark), Color.WHITE, Color.DKGRAY)
+                                .positiveButton("Entendido", new DroidDialog.onPositiveListener() {
+                                    @Override
+                                    public void onPositive(Dialog dialog) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
                         //Toast.makeText(getActivity(), "Conecta los audifonos para reproducir el audio", Toast.LENGTH_SHORT).show();
-                        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.viewSnack),"Conecta los audifonos para reproducir el audio",Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        //Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.viewSnack),"Conecta los audifonos para reproducir el audio",Snackbar.LENGTH_LONG);
+                        //snackbar.show();
                     }
                 }
                 break;
