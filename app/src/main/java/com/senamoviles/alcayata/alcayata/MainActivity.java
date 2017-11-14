@@ -1,12 +1,8 @@
 package com.senamoviles.alcayata.alcayata;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -24,7 +20,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,18 +29,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.droidbyme.dialoglib.DroidDialog;
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -192,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 .normalTextColor(Color.rgb(53, 5, 23))
                 .normalColor(Color.rgb(255, 255, 255)) //119,72,23
                 .highlightedColor(Color.rgb(53, 5, 23))
-                .subNormalText("Imagen española del siglo XVIII");
+                .textSize(20);
 
         bmb.addBuilder(builder);
 
@@ -211,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 .normalTextColor(Color.rgb(53, 5, 23))
                 .normalColor(Color.rgb(255, 255, 255)) //119,72,23
                 .highlightedColor(Color.rgb(53, 5, 23))
-                .subNormalText("Imagen española del siglo XVIII");
+                .textSize(20);
         bmb.addBuilder(builder1);
 
         HamButton.Builder builder2 = new HamButton.Builder()
@@ -228,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 .normalTextColor(Color.rgb(53, 5, 23))
                 .normalColor(Color.rgb(255, 255, 255)) //119,72,23
                 .highlightedColor(Color.rgb(53, 5, 23))
-                .subNormalText("Imagen española del siglo XVIII");
+                .textSize(20);
         bmb.addBuilder(builder2);
 
         HamButton.Builder builder3 = new HamButton.Builder()
@@ -245,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
                 .normalTextColor(Color.rgb(53, 5, 23))
                 .normalColor(Color.rgb(255, 255, 255)) //119,72,23
                 .highlightedColor(Color.rgb(53, 5, 23))
-                .subNormalText("Imagen española del siglo XVIII");
+                .textSize(20);
         bmb.addBuilder(builder3);
 
 

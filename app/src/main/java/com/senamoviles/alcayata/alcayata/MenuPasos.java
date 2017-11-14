@@ -65,6 +65,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
+                .textSize(20)
                 //.subNormalText("Imagen española del siglo XVIII")
                 ;
 
@@ -85,6 +86,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
+                .textSize(20)
                 //.subNormalText("Imagen española del siglo XVIII")
                 ;
         bmb.addBuilder(builder1);
@@ -103,6 +105,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
+                .textSize(20)
                 //.subNormalText("Imagen española del siglo XVIII")
                 ;
         bmb.addBuilder(builder2);
@@ -122,6 +125,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
+                .textSize(20)
                 //.subNormalText("Imagen española del siglo XVIII")
                 ;
         bmb.addBuilder(builder3);
