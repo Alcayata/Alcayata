@@ -3,8 +3,8 @@ package com.senamoviles.alcayata.alcayata;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
@@ -19,8 +19,6 @@ public class MenuPasos extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private BoomMenuButton bmb;
     String paso = "paso";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +29,6 @@ public class MenuPasos extends AppCompatActivity {
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
         bmb.setAutoBoom(true);
-
-
-
 
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -65,9 +60,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
-                .textSize(20)
-                //.subNormalText("Imagen española del siglo XVIII")
-                ;
+                .subNormalText("Imagen española del siglo XVIII");
 
         bmb.addBuilder(builder);
 
@@ -86,9 +79,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
-                .textSize(20)
-                //.subNormalText("Imagen española del siglo XVIII")
-                ;
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder1);
 
         HamButton.Builder builder2 = new HamButton.Builder()
@@ -105,9 +96,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
-                .textSize(20)
-                //.subNormalText("Imagen española del siglo XVIII")
-                ;
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder2);
 
         HamButton.Builder builder3 = new HamButton.Builder()
@@ -125,9 +114,7 @@ public class MenuPasos extends AppCompatActivity {
                 .normalTextColor(Color.rgb(53,5,23))
                 .normalColor(Color.rgb(171,138,152)) //119,72,23
                 .highlightedColor(Color.rgb(53,5,23))
-                .textSize(20)
-                //.subNormalText("Imagen española del siglo XVIII")
-                ;
+                .subNormalText("Imagen española del siglo XVIII");
         bmb.addBuilder(builder3);
     }
 }
