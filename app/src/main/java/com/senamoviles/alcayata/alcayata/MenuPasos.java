@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.medialablk.easygifview.EasyGifView;
+import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.OnBoomListener;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
 public class MenuPasos extends AppCompatActivity {
@@ -19,18 +22,58 @@ public class MenuPasos extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private BoomMenuButton bmb;
     String paso = "paso";
-
+    EasyGifView gif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_pasos);
+
         bmb = (BoomMenuButton) findViewById(R.id.bmb);
         assert bmb != null;
         bmb.setButtonEnum(ButtonEnum.Ham);
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
-        bmb.setAutoBoom(true);
+        bmb.setAutoBoom(false);
+
+        gif=(EasyGifView)findViewById(R.id.gif);
+        gif.setGifFromResource(R.drawable.animacion_small);
+
+        bmb.setOnBoomListener(new OnBoomListener() {
+            @Override
+            public void onClicked(int index, BoomButton boomButton) {
+
+
+            }
+
+            @Override
+            public void onBackgroundClick() {
+
+            }
+
+            @Override
+            public void onBoomWillHide() {
+
+            }
+
+            @Override
+            public void onBoomDidHide() {
+
+            }
+
+            @Override
+            public void onBoomWillShow() {
+                gif.setGifFromResource(R.drawable.vacio);
+
+            }
+
+            @Override
+            public void onBoomDidShow() {
+
+
+            }
+        });
+
 
 
 

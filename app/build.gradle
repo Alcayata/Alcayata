@@ -46,6 +46,7 @@ dependencies {
     compile 'com.github.javiersantos:BottomDialogs:1.2.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.github.IsPra94:EasyGifView:1.0.1'
 }
 
 
