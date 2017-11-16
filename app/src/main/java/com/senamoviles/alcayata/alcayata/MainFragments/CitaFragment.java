@@ -46,20 +46,20 @@ public class CitaFragment extends Fragment {
 
         switch (MainActivity.opcion) {
             case "San Juan Evangelista":
-                imgCita.setImageResource(R.drawable.ref_juan);
+                imgCita.setImageResource(R.drawable.ref_juan_new);
                 txt_cita.setText(getResources().getString(R.string.refJuan));
 
                 break;
             case "El Crucifijo":
-                imgCita.setImageResource(R.drawable.ref_crucifijo);
+                imgCita.setImageResource(R.drawable.ref_crucifijo_new);
                 txt_cita.setText(getResources().getString(R.string.refCrucifijo));
                 break;
             case "Virgen de los Dolores":
-                imgCita.setImageResource(R.drawable.ref_virgen);
+                imgCita.setImageResource(R.drawable.ref_virgen_new);
                 txt_cita.setText(getResources().getString(R.string.refVirgen));
                 break;
             case "El Señor del Huerto":
-                imgCita.setImageResource(R.drawable.ref_huerto);
+                imgCita.setImageResource(R.drawable.ref_huerto_new);
                 txt_cita.setText(getResources().getString(R.string.refHuerto));
                 break;
         }

@@ -32,6 +32,7 @@ import java.io.File;
  */
 public class DescargaFragment extends Fragment {
 
+
     View view;
     String nombrePaso = "";
     String nombreArchivo = "";
@@ -92,7 +93,7 @@ public class DescargaFragment extends Fragment {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Log.e("firebase ",";archivo local ha sido creado " +localFile.toString());
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.frag_descarga),"Archivo descargado, desea abrirlo?",Snackbar.LENGTH_LONG)
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.frag_descarga),"Archivo descargado, desea abrirlo?",Snackbar.LENGTH_INDEFINITE)
                         .setAction("OPEN", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
