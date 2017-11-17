@@ -1,5 +1,7 @@
 package com.senamoviles.alcayata.alcayata;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
 
 
     private static final int PERMISSION_GROUPSTORAGE = 1;
+    private static final int PERMISSION_GROUPLOCATION = 1;
     public static String opcion;
     public static final String TAG = "Semana Santa";
     public static String tagfragment = "";
@@ -93,6 +96,11 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
 
     // Storage Permissions variables
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_LOCATION = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+
+    };
     private static String[] PERMISSIONS_STORAGE = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -118,6 +126,19 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
         }
     }
 
+    public static void verifyLocationPermissions(Activity activity){
+        int locationFinePermision = ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+        int locationCoarsePermision = ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if(locationFinePermision != PackageManager.PERMISSION_GRANTED || locationCoarsePermision != PackageManager.PERMISSION_GRANTED ){
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_LOCATION,
+                    PERMISSION_GROUPLOCATION
+
+            );
+        }
+    }
+
     public static void verifyFilePermision(Activity activity) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int hasPermission = ActivityCompat.checkSelfPermission(activity, android.Manifest.permission_group.STORAGE);
@@ -135,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements BeaconConsumer {
         ButterKnife.bind(this);
 
         verifyStoragePermissions(this);
+        verifyLocationPermissions(this);
         verifyFilePermision(this);
 
         ActionBar mActionBar = getSupportActionBar();
